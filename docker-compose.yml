@@ -1,0 +1,9 @@
+version: '3.3'
+services:
+  rest-service:
+    container_name: rest_service
+    build: .
+    ports:
+      - 8088:8088
+    environment:
+      - mysql://db/rest_service

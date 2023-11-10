@@ -1,10 +1,10 @@
 import mysql from 'mysql2';
 
 const pool = mysql.createPool({
-    host: 'localhost',
+    host: 'db-rest-service',
     user: 'root',
-    password: 'mysql',
-    database: 'rest_database'
+    password: 'admin',
+    database: 'saranghaengbok_rest'
 }).promise();
 
 export async function getUser(username: any) {
