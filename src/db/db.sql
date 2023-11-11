@@ -7,6 +7,8 @@ CREATE TABLE user(
     password VARCHAR(255) NOT NULL
 );
 
+
+
 INSERT INTO user (username, email, password)
 VALUES
 ('usertest1', 'useremail1', 'userpass1'),
