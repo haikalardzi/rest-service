@@ -1,5 +1,0 @@
-request body for chat :
-
-{
-    
-}
