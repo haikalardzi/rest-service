@@ -2,8 +2,9 @@ version: '3.3'
 services:
   rest-service:
     container_name: rest_service
-    build: .
+    build:
+      dockerfile: Dockerfile
     ports:
       - 8088:8088
     environment:
-      - mysql://db/rest_service
+      - mysql://db/saranghaengbok_rest
