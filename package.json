@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "for client-spa reactTS",
   "type": "module",
-  "main": "app.ts",
+  "main": "transaction.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon -x ts-node --esm ./src/controller/chat.ts"
+    "start": "nodemon -x ts-node --esm ./src/controller/transaction.ts"
   },
   "author": "kelompok i",
   "license": "ISC",

@@ -20,7 +20,6 @@ const server = http.createServer(app);
 
 
 app.get('/transaction/:username', async (req, res) => {
- 
     const username = req.params.username;
     const result = await getTransactions(username);
     res.send(result);

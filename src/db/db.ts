@@ -7,7 +7,7 @@ export const pool = mysql.createPool({
     database: 'saranghaengbok_rest'
 }).promise();
 
-export async function getUser(username: any) {
+export async function getUser(username: string) {
     const rows: any[] = await pool.query(`
     SELECT username FROM user
     WHERE username = ?
