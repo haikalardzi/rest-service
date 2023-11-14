@@ -6,7 +6,7 @@
   "main": "app.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon -x ts-node --esm ./src/app.ts"
+    "start": "nodemon -x ts-node --esm ./src/controller/transaction.ts"
   },
   "author": "kelompok i",
   "license": "ISC",
