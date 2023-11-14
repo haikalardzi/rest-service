@@ -115,3 +115,39 @@ export async function getTransactions(username: string) {
     return getUserRate(username);
   }
 
+
+  export async function getChatHistory(username: string) {
+    const rows: any[] = await pool.query(`
+      SELECT * FROM chat_history
+      WHERE sender_username = ? OR receiver_username = ?
+      ORDER BY timestamp DESC
+    `, [username, username]);
+    console.log(rows);
+    return rows;
+  }
+  
+  export async function addChatMessage(username: string, receiverUsername: string, message: string) {
+    const result: any[] = await pool.query(`
+      INSERT INTO chat_history (sender_username, receiver_username, message)
+      VALUES (?, ?, ?)
+    `, [username, receiverUsername, message]);
+    return getChatHistory(username);
+  }
+  
+  export async function getFriends(username: string) {
+    const rows: any[] = await pool.query(`
+      SELECT user1_username, user2_username FROM friends
+      WHERE user1_username = ? OR user2_username = ?
+      AND status = 'accepted'
+    `, [username, username]);
+    console.log(rows);
+    return rows;
+  }
+  
+  export async function addFriend(user1Username: string, user2Username: string) {
+    const result: any[] = await pool.query(`
+      INSERT INTO friends (user1_username, user2_username)
+      VALUES (?, ?)
+    `, [user1Username, user2Username]);
+    return getFriends(user1Username);
+  }
