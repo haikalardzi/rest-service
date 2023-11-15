@@ -30,21 +30,22 @@ export async function createUser(username: any, email: any, password: any) {
     return getUser(username);
 }
 
-export async function getTransactions(username: string) {
+export async function getTransactions(transaction_id: number) {
     const rows: any[] = await pool.query(`
       SELECT * FROM transaction
-      WHERE username = ?
-    `, [username]);
+      WHERE transaction_id = ?
+    `, [transaction_id]);
     console.log(rows);
     return rows;
   }
+
   
-  export async function createTransaction(username: string, item: string, item_id: string, price: number, total_item: number, pay_total: number, date: string) {
+  export async function createTransaction(transaction_id: number, buyer_username: string, seller_username: string, item_id: number, quantity: number) {
     const result: any[] = await pool.query(`
-      INSERT INTO transaction (username, item, item_id, price, total_item, pay_total, date)
+      INSERT INTO transaction (transaction_id,buyer_username, seller_username,item_id, quantity )
       VALUES (?, ?, ?, ?, ?, ?, ?)
-    `, [username, item, item_id, price, total_item, pay_total, date]);
-    return getTransactions(username);
+    `, [transaction_id,buyer_username, seller_username,item_id, quantity ]);
+    return getTransactions(transaction_id);
   }
 
   export async function getItemReview(item_id: string) {
@@ -65,7 +66,7 @@ export async function getTransactions(username: string) {
   }
 
 
-  export async function createItemReview(id_review: string, item_id: string, review: string) {
+  export async function createItemReview(id_review: number, item_id: string, review: string) {
     const result: any[] = await pool.query(`
       INSERT INTO itemReview (id_review, item_id, review)
       VALUES (?, ?,?)
@@ -73,7 +74,7 @@ export async function getTransactions(username: string) {
     return getItemReview(item_id);
   }
 
-  export async function createItemRate(id_rate: string, item_id: string, rate_value: number) {
+  export async function createItemRate(id_rate: number, item_id: string, rate_value: number) {
     const result: any[] = await pool.query(`
       INSERT INTO itemRate (id_rate, item_id, rate_value)
       VALUES (?, ?, ?)
@@ -99,7 +100,7 @@ export async function getTransactions(username: string) {
   }
 
 
-  export async function createUserReview(id_review: string, username: string, review: string) {
+  export async function createUserReview(id_review: number, username: string, review: string) {
     const result: any[] = await pool.query(`
       INSERT INTO userReview (id_review, username, review)
       VALUES (?, ?,?)
@@ -107,7 +108,7 @@ export async function getTransactions(username: string) {
     return getUserReview(username);
   }
 
-  export async function createUserRate(id_rate: string, username: string, rate_value: number) {
+  export async function createUserRate(id_rate: number, username: string, rate_value: number) {
     const result: any[] = await pool.query(`
       INSERT INTO userRate (id_rate, username, rate_value)
       VALUES (?, ?, ?)
