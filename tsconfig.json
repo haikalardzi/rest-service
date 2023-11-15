@@ -11,5 +11,5 @@
         "composite": true
     },
     "esModuleInterop": true,
-    "include": ["src/**/*"],
+    "include": ["types", "app.ts", "core", "router", "services", "template"],
 }
