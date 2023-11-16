@@ -7,7 +7,7 @@ import xml2js from "xml2js";
 
 const getAllTransactionHandler = async (req: Request, res: Response) => {
     let transactionReq: Transaction[];
-    const page = parseInt(req.query.page as string);
+    const page = parseInt(req.params.page);
     const xml = util.format(getAllTransaction.template, page);
     try{
         const { response } = await soapRequest({
@@ -19,6 +19,7 @@ const getAllTransactionHandler = async (req: Request, res: Response) => {
         const parser = new xml2js.Parser();
         parser.parseString(body, async (err: any, result: any) => {
             const data = result["S:Envelope"]["S:Body"][0]["ns2:getAllTransactionResponse"][0]["return"][0];
+            console.log(data);
             try{
                 transactionReq = JSON.parse(data).data;
             } catch {

@@ -4,7 +4,7 @@ import cors from 'cors';
 import router from "./router/router.ts";
 
 const app: Express = express();
-const port: number = 8080;
+const port: number = 8088;
 
 app.use(cors());
 app.use(bodyParser.json());

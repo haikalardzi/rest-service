@@ -1,5 +1,5 @@
 {
-    "watch": ["router","services","core","template","types"],
+    "watch": ["router","services","core","template","types","models"],
     "ext": ".ts,.js",
     "exec": "ts-node ./app.ts"
 }

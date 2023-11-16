@@ -6,7 +6,7 @@ const headers = {
     "X-API-Key": "rest",
 }
 
-const getAllTransactionWsdl = `<?xml version="1.0" encoding="utf-8"?>
+const getAllTransactionXml = `<?xml version="1.0" encoding="utf-8"?>
     <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
       <soap:Body>
         <getAllTransaction xmlns="http://service.saranghaengbok.org/">
@@ -17,7 +17,7 @@ const getAllTransactionWsdl = `<?xml version="1.0" encoding="utf-8"?>
 
 const getAllTransaction: SoapEndpoint = {
     url: url,
-    template: getAllTransactionWsdl,
+    template: getAllTransactionXml,
     headers: headers,
 }
 

@@ -4,6 +4,10 @@ type SoapEndpoint = {
     headers: object;
 };
 
+type LoginRequest = {
+    username: string;
+    password: string;
+}
 
 
-export { SoapEndpoint };
+export { SoapEndpoint, LoginRequest};
