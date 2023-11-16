@@ -11,42 +11,51 @@ const guest: User = {
     password: "",
 };
 
+function rowsToUser(row: any): User{
+    var rows : any;
+    try {
+        rows = JSON.parse(JSON.stringify(row));
+    } catch (error) {
+        rows = row;
+    }
+    return {
+        username: rows.username,
+        email: rows.email,
+        password: rows.password,
+    };
+}
+
 class UserModel {
     pool: Pool
     constructor(){
         this.pool = pool;
     }
-
-    public static rowsToUser(row: any): User{
-        return {
-            username: row.username,
-            email: row.email,
-            password: row.password,
-        };
-    }
     
-    async create(user: User){
-        if (this.findUser(user.username)){
-            const rows: any[] = await this.pool.query(
-                `INSERT INTO user (email, username, password) VALUES (?, ?, ?) RETURNING username`, 
-                [user.email, user.username, user.password]
-            );
-            return rows[0].username;
-        } else {
-            return "";
+    async createUser(username: any, email: any, password: any) {
+        try{
+            const result: any[] = await pool.query(`
+            INSERT INTO user (username, email, password)
+            VALUES (?, ?, ?)
+            `, [username, email, password]);
+            return this.getUser(username);
+        } catch (err: any) {
+            return err;
         }
     }
 
-    async findUser(username: string){
-        const rows: any[] = await this.pool.query(
-            `SELECT * FROM user WHERE username = ?`,
-            [username]
-        );
-        if (rows.length == 0){
-            return guest;
-        } else {
-            return UserModel.rowsToUser(rows[0]);
-        }
+    async getUser(username: any) {
+        const rows = await pool.query(`
+        SELECT * FROM user
+        WHERE username = ?
+        `, [username]);
+        console.log(Response.json(rows).json.toString);
+        return rowsToUser(rows[0]);
+    }
+
+    async getUsers() {
+        const rows: any[] = await pool.query(`SELECT * FROM user`);
+        console.log(rows);
+        return rows;
     }
 }
 

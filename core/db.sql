@@ -1,5 +1,6 @@
-CREATE DATABASE rest_database;
-USE rest_database;
+CREATE SCHEMA IF NOT EXISTS `saranghaengbok_rest` DEFAULT CHARACTER SET utf8 ;
+USE `saranghaengbok_rest` ;
+
 
 CREATE TABLE user(
     username VARCHAR(255) PRIMARY KEY NOT NULL,

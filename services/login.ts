@@ -15,13 +15,14 @@ const loginHandler = async (req: Request<LoginRequest>, res: Response) => {
                     error: err,
                 });
             } else {
-                const user = await usermodel.findUser(username);
+                const user = await usermodel.getUser(username);
                 if (user) {
                     bcrypt.compare(password, user.password!, (err, result)=> {
                         if (err) {
                             res.status(401).json({
                                 message: "Login failed",
                             });
+                            return;
                         }
                         if (result) {
                             const token = jwt.sign({
@@ -30,10 +31,12 @@ const loginHandler = async (req: Request<LoginRequest>, res: Response) => {
                             {
                                 expiresIn: "10d",
                             });
-                            return res.status(200).json({
+                            
+                            res.status(200).json({
                                 message: "Logged in as "+ user.username,
                                 token: token,
                             });
+                            return;
                         }
                         res.status(401).json({
                             message: "Wrong Credentials",
