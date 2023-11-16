@@ -5,11 +5,8 @@ import User from "../types/user.js";
 
 const registerHandler = async (req: Request<User>, res: Response) => {
     var username = req.body?.username;
-    console.log(username);
     var email = req.body?.email;
-    console.log(email);
     var password = req.body?.password;
-    console.log(password);
     password = await bcrypt.hash(password!, 5);
     try{
         const usermodel = new UserModel();

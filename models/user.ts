@@ -2,7 +2,7 @@ import mysql from "mysql2";
 
 import User from "../types/user.js";
 import { pool } from "../core/db.ts";
-import { Pool } from "mysql2/promise";
+import { FieldPacket, OkPacket, Pool, ProcedureCallPacket, ResultSetHeader, RowDataPacket } from "mysql2/promise";
 
 
 const guest: User = {
@@ -12,16 +12,10 @@ const guest: User = {
 };
 
 function rowsToUser(row: any): User{
-    var rows : any;
-    try {
-        rows = JSON.parse(JSON.stringify(row));
-    } catch (error) {
-        rows = row;
-    }
     return {
-        username: rows.username,
-        email: rows.email,
-        password: rows.password,
+        username: row.username,
+        email: row.email,
+        password: row.password,
     };
 }
 
@@ -44,18 +38,17 @@ class UserModel {
     }
 
     async getUser(username: any) {
-        const rows = await pool.query(`
+        const rows : any = await pool.query(`
         SELECT * FROM user
         WHERE username = ?
         `, [username]);
-        console.log(Response.json(rows).json.toString);
-        return rowsToUser(rows[0]);
+        return rowsToUser(rows[0][0]);
     }
 
     async getUsers() {
         const rows: any[] = await pool.query(`SELECT * FROM user`);
         console.log(rows);
-        return rows;
+        return rows[0];
     }
 }
 
