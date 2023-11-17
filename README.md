@@ -1,45 +1,30 @@
-# rest-service
-## Get Started to developing
-type in to terminal
-```
-npm install
-```
+# SUBMODUL CLIENT SPA
 
-# TUGAS BESAR IF3110 PENGEMBANGAN APLIKASI BERBASIS WEB
+Repositori ini adalah submodul rest-service dari Tugas Besar IF3110 Pengembangan Aplikasi Berbasis Web sekaligus merupakan back-end dari submodul client-spa
 
-Untuk Tugas Besar 2 IF3110 Pengembangan Aplikasi Berbasis Web, kami dari Kelompok I mengembangkan *web-service rest* Saranghaengbok. Saranghaengbok ditujukan sebagai media jasa titip *merchandise* K-Pop. 
-
-## Requirement
-* nodejs v20
-* Docker Desktop
-
-## Instalasi
-
-1. Clone repositori dengan *command* berikut
-```
-git clone https://gitlab.informatika.org/if3110-2023-01-i/tugas-besar-1.git
-```
-## Menjalankan Server
-
-1. Pindah ke direktori repositori
+## How to run
+0. Clone repository submodul config dengan
 ```sh
-cd rest-service
+git clone https://github.com/AlphaThrone/client-spa
+git clone https://github.com/AlphaThrone/rest-service
+git clone https://github.com/AlphaThrone/php-app
+git clone https://github.com/AlphaThrone/config
+git clone https://github.com/AlphaThrone/soap-service
 ```
-2. Masukkan *command* berikut ke terminal
+1. Buka reposity **config** dan jalankan pada terminal
 ```sh
-docker compose up --build
-``` 
-
-## Skema Basis Data
-
-## Endpoint API
-
-## Payload dan Response API
-
-
- 
-
-
-
-## Pembagian Tugas
-
+docker compose up --build -d
+```
+2. Lakukan seeding dari backend database dengan cara sebagai berikut: <br>
+    1. Buka phpmyadmin <br>
+    klik [disini](localhost:8080) atau akses link berikut pada browser
+    ```
+    localhost:8080
+    ```
+    2. Pilih database saranghaengbok_rest
+    3. Pilih import
+    4. Pilih file pada direktori core/db.sql
+3. Web app bisa dijalankan dengan mengakses pada browser
+```
+localhost:3000
+```
