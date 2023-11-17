@@ -21,6 +21,7 @@ const loginHandler = async (req: Request<LoginRequest>, res: Response) => {
                         if (err) {
                             res.status(401).json({
                                 message: "Login failed",
+                                isauthorized: false,
                             });
                             return;
                         }
@@ -35,11 +36,13 @@ const loginHandler = async (req: Request<LoginRequest>, res: Response) => {
                             res.status(200).json({
                                 message: "Logged in as "+ user.username,
                                 token: token,
+                                isauthorized: true,
                             });
                             return;
                         }
                         res.status(401).json({
                             message: "Wrong Credentials",
+                            isauthorized: false,
                         });
                     });
                 }

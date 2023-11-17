@@ -12,11 +12,15 @@ const guest: User = {
 };
 
 function rowsToUser(row: any): User{
-    return {
-        username: row.username,
-        email: row.email,
-        password: row.password,
-    };
+    try{
+        return {
+            username: row.username,
+            email: row.email,
+            password: row.password,
+        };
+    } catch (err) {
+        return guest;
+    }
 }
 
 class UserModel {
@@ -27,11 +31,13 @@ class UserModel {
     
     async createUser(username: any, email: any, password: any) {
         try{
-            const result: any[] = await pool.query(`
-            INSERT INTO user (username, email, password)
-            VALUES (?, ?, ?)
-            `, [username, email, password]);
-            return this.getUser(username);
+            if ((await this.getUser(username)).username) {
+                const result: any[] = await pool.query(`
+                INSERT INTO user (username, email, password)
+                VALUES (?, ?, ?)
+                `, [username, email, password]);
+                return username;
+            }
         } catch (err: any) {
             return err;
         }
