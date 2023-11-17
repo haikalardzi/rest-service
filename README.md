@@ -1,4 +1,4 @@
-# SUBMODUL CLIENT SPA
+# SUBMODUL REST SERVICE
 
 Repositori ini adalah submodul rest-service dari Tugas Besar IF3110 Pengembangan Aplikasi Berbasis Web sekaligus merupakan back-end dari submodul client-spa
 
@@ -28,3 +28,8 @@ docker compose up --build -d
 ```
 localhost:3000
 ```
+
+## Pembagian Tugas
+
+### REST
+Backend Login, Register, Transaction : 13521012
